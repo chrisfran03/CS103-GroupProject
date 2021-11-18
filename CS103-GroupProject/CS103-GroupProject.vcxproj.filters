@@ -18,5 +18,13 @@
     <ClCompile Include="CS103-GroupProject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="teacher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="teacher.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
