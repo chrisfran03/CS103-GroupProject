@@ -9,9 +9,9 @@
 
 using namespace std;
 
-void teacher_registration_screen();
+void display_teacher_screen();
 
-void admin_screen();
+void display_admin_screen();
 
 int main()
 {
@@ -33,13 +33,13 @@ int main()
 		switch (choice)
 		{
 		case 1:
-			teacher_registration_screen();
+			display_teacher_screen();
 			break;
 		case 2:
 			//login parent
 			break;
 		case 3:
-			admin_screen();
+			display_admin_screen();
 			break;
 		case 4:
 			exit(0);
@@ -53,7 +53,7 @@ int main()
 }
 
 
-void teacher_registration_screen()
+void display_teacher_screen()
 {
 	int choice;
 	fstream teacher_stream;
@@ -90,7 +90,7 @@ void teacher_registration_screen()
 }
 
 
-void admin_screen()
+void display_admin_screen()
 {
 	string username, password;
 	int choice;
