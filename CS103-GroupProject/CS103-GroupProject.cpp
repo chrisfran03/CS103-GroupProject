@@ -6,12 +6,19 @@
 #include <iomanip>
 #include <string>
 #include "teacher.h"
+#include "Admin.h"
+#include "parent.h"
+#include "student.h"
 
 using namespace std;
 
 void display_teacher_screen();
 
 void display_admin_screen();
+
+void display_parent_screen();
+
+void display_student_screen();
 
 int main()
 {
@@ -149,6 +156,16 @@ void display_admin_screen()
 		system("CLS");
 
 	} while (username != "username" && password != "password");
+}
+
+void display_parent_screen()
+{
+
+}
+
+void display_student_screen()
+{
+
 }
 
 
