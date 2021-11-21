@@ -11,6 +11,8 @@ using namespace std;
 
 void teacher_registration_screen();
 
+void admin_screen();
+
 int main()
 {
 	int choice;
@@ -37,7 +39,7 @@ int main()
 			//login parent
 			break;
 		case 3:
-			//login admin
+			admin_screen();
 			break;
 		case 4:
 			exit(0);
@@ -87,6 +89,67 @@ void teacher_registration_screen()
 	system("CLS");
 }
 
+
+void admin_screen()
+{
+	string username, password;
+	int choice;
+
+	system("CLS");
+
+	do
+	{
+		cout << "Username:";
+		cin >> username;
+		cout << "Password:";
+		cin >> password;
+
+		if (username == "username" && password == "password")
+		{
+			system("CLS");
+			cout << "WELCOME ADMIN" << endl;
+			cout << "1.See class records and parents records" << endl;
+			cout << "2.Report of students who need help" << endl;
+			cout << "3.Report of students who are progressing" << endl;
+			cout << "4.Log out" << endl;
+
+			cout << "Enter you choice:";
+			cin >> choice;
+			cin.ignore();
+
+			while (1)
+			{
+				if (choice == 1)
+				{
+					//class records and parents records here
+				}
+				else if (choice == 2)
+				{
+					//report of students who need help
+				}
+				else if (choice == 3)
+				{
+					//report of students who are progressing
+				}
+				else if (choice == 4)
+				{
+					break;
+				}
+				else
+				{
+					cout << "\nEnter a valid option" << endl;
+				}
+			}
+		}
+		else
+		{
+			cout << "Either username or password is incorrect.Try again." << endl;
+		}
+		system("pause");
+		system("CLS");
+
+	} while (username != "username" && password != "password");
+}
 
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

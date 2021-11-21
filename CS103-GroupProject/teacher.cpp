@@ -64,7 +64,7 @@ void login_teacher(fstream& teacher_stream)
 	char username[SIZE];
 	char password[SIZE];
 	bool flag = false;
-	int choice;
+	int choice, i = 1;
 
 	system("CLS");
 
@@ -77,53 +77,63 @@ void login_teacher(fstream& teacher_stream)
 	}
 	else
 	{
-
-		cout << "Username:";
-		cin.getline(username, SIZE);
-		cout << "Password:";
-		cin.getline(password, SIZE);
-		cout << endl;
-
-
-		teacher_stream.read(reinterpret_cast<char*>(&t), sizeof(t));
-		while (!teacher_stream.eof())
+		do
 		{
-			if (strcmp(username, t.username) == 0 && strcmp(password, t.password) == 0)
-			{
-				system("CLS");
 
-				cout << "\nWELCOME " << t.name << endl;
+			cout << "Username:";
+			cin.getline(username, SIZE);
+			cout << "Password:";
+			cin.getline(password, SIZE);
+			cout << endl;
 
-				while (1)
-				{
-					cout << "1.Create student record" << endl;
-					cout << "2.Logout" << endl;
-					cout << "Enter your choice:";
-					cin >> choice;
-					cin.ignore();
 
-					if (choice == 1)
-					{
-						//Create student record registration screen here
-					}
-
-					else if (choice == 2)
-					{
-						break;
-					}
-					else
-					{
-						cout << "Enter a valid option" << endl;
-					}
-				}
-				flag = true;
-			}
 			teacher_stream.read(reinterpret_cast<char*>(&t), sizeof(t));
-		}
-		if (flag == false)
-		{
-			cout << "Either the username or password is incorrect" << endl;
-		}
+			while (!teacher_stream.eof())
+			{
+				if (strcmp(username, t.username) == 0 && strcmp(password, t.password) == 0)
+				{
+					system("CLS");
+
+					cout << "\nWELCOME " << t.name << endl;
+
+					while (1)
+					{
+						cout << "1.Create student record" << endl;
+						cout << "2.Logout" << endl;
+						cout << "Enter your choice:";
+						cin >> choice;
+						cin.ignore();
+
+						if (choice == 1)
+						{
+							//Create student record registration screen here
+						}
+
+						else if (choice == 2)
+						{
+							break;
+						}
+						else
+						{
+							cout << "Enter a valid option" << endl;
+						}
+					}
+					flag = true;
+				}
+				teacher_stream.read(reinterpret_cast<char*>(&t), sizeof(t));
+			}
+
+			if (flag == false)
+			{
+
+				teacher_stream.close();
+				cout << "Either the username or password is incorrect" << endl;
+				i++;
+				teacher_stream.open("teacher_registration.dat", ios::in | ios::binary);
+
+			}
+
+		} while ((flag == false) && (i <= 3));
 
 	}
 	teacher_stream.close();
