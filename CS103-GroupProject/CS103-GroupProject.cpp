@@ -44,6 +44,7 @@ int main()
 			break;
 		case 2:
 			//login parent
+			display_parent_screen();
 			break;
 		case 3:
 			display_admin_screen();
@@ -160,7 +161,37 @@ void display_admin_screen()
 
 void display_parent_screen()
 {
+	fstream parent_stream;
+	bool exit = false;
+	for(;;)
+	{
+		system("cls");
+		if (exit) break;
 
+		cout << "1.Register" << endl;
+		cout << "2.Login" << endl;
+		cout << "3.Go Back" << endl;
+		cout << "Enter your choice:";
+		int choice;
+		cin >> choice;
+		cin.ignore();
+
+		switch (choice)
+		{
+		case 1:
+			register_parent(parent_stream);
+			break;
+		case 2:
+			login_parent(parent_stream);
+			break;
+		case 3:
+			exit = true;
+			break;
+		default:
+			cout << "Enter a valid option" << endl;
+			break;
+		}
+	}
 }
 
 void display_student_screen()

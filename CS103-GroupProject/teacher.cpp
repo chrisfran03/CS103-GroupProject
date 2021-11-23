@@ -6,6 +6,7 @@
 using namespace std;
 
 const int SIZE = 100;
+char user_name[SIZE];
 
 struct Teacher
 {
@@ -20,33 +21,52 @@ struct Teacher
 	char password[SIZE];
 };
 
+
+
 void register_teacher(fstream& teacher_stream)
 {
-
 	system("CLS");
-
+	char user_name[SIZE];
 	Teacher t;
 	teacher_stream.open("teacher_registration.dat", ios::out | ios::app | ios::binary);
 
 	cout << "Enter your full name:";
-	cin.getline(t.name, SIZE);
+	cin >> t.name;
 	cout << "Enter your gender:";
-	cin.getline(t.gender, SIZE);
+	cin >> t.gender;
 	cout << "Enter your DOB:";
-	cin.getline(t.dob, SIZE);
+	cin >> t.dob;
 	cout << "Enter your email:";
-	cin.getline(t.email, SIZE);
+	cin >> t.email;
 	cout << "Enter your contact number:";
-	cin.getline(t.contact_num, SIZE);
+	cin >> t.contact_num;
 	cout << "Enter your classroom number:";
-	cin.getline(t.class_num, SIZE);
+	cin >> t.class_num;
 	cout << "Enter the year you teach:";
-	cin.getline(t.year, SIZE);
-	cout << "Enter your username:";
-	cin.getline(t.username, SIZE);
-	cout << "Enter your password:";
-	cin.getline(t.password, SIZE);
+	cin >> t.year;
 
+	teacher_stream.close();
+
+	//
+	cout << "Enter your username:";
+	cin >> user_name;
+	while (checkUsername(teacher_stream, user_name) == true)
+	{
+		cout << "\nUsername already exist.Try again.\n\nEnter your username:";
+		cin >> user_name;
+	}
+
+	teacher_stream.open("teacher_registration.dat", ios::out | ios::app | ios::binary);
+
+	strcpy_s(t.username, user_name);
+	//
+
+
+	cout << "Enter your password:";
+	cin >> t.password;
+
+
+	cin.ignore();
 	system("CLS");
 
 	cout << "\nRegistering you to the system....." << endl;
@@ -139,4 +159,34 @@ void login_teacher(fstream& teacher_stream)
 	teacher_stream.close();
 	system("pause");
 	system("CLS");
+}
+
+bool checkUsername(fstream& teacher_stream, char* user_name)
+{
+	Teacher t;
+	bool user_exists = false;
+
+	teacher_stream.open("teacher_registration.dat", ios::in | ios::binary);
+
+	if (!teacher_stream)
+	{
+		cout << "\nUnable to access the file" << endl;
+	}
+	else
+	{
+
+		teacher_stream.read(reinterpret_cast<char*>(&t), sizeof(t));
+		while (!teacher_stream.eof())
+		{
+			if (strcmp(user_name, t.username) == 0)
+			{
+				user_exists = true;
+			}
+
+			teacher_stream.read(reinterpret_cast<char*>(&t), sizeof(t));
+		}
+	}
+	teacher_stream.close();
+
+	return user_exists;
 }
