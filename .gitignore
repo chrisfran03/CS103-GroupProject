@@ -1,1 +1,4 @@
 .vs/
+.vs/*
+Debug/*
+CS103-GroupProject/Debug/*
