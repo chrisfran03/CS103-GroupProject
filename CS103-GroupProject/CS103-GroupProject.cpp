@@ -5,6 +5,7 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+
 #include "teacher.h"
 #include "Admin.h"
 #include "parent.h"
@@ -13,12 +14,8 @@
 using namespace std;
 
 void display_teacher_screen();
-
 void display_admin_screen();
-
 void display_parent_screen();
-
-void display_student_screen();
 
 int main()
 {
@@ -130,14 +127,37 @@ void display_admin_screen()
 				if (choice == 1)
 				{
 					//class records and parents records here
+					cout << "1.Class record\n2.Parent record\nEnter your choice:";
+					cin >> choice;
+					cin.ignore();
+
+					string name;
+					switch (choice)
+					{
+					case 1:
+					{
+						StudentRecordProcess();
+						break;
+					}
+					case 2:
+					{
+						StudentRecordProcess();
+						break;
+					}
+					default:
+						cout << "\nEnter a valid option" << endl;
+						break;
+					}
 				}
 				else if (choice == 2)
 				{
 					//report of students who need help
+					StudentRecordProcess();
 				}
 				else if (choice == 3)
 				{
 					//report of students who are progressing
+					StudentRecordProcess();
 				}
 				else if (choice == 4)
 				{
@@ -193,12 +213,6 @@ void display_parent_screen()
 		}
 	}
 }
-
-void display_student_screen()
-{
-
-}
-
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu

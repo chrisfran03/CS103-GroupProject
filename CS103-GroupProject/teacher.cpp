@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <string>
 #include "teacher.h"
+#include "student.h"
 using namespace std;
 
 const int SIZE = 100;
@@ -127,6 +128,7 @@ void login_teacher(fstream& teacher_stream)
 						if (choice == 1)
 						{
 							//Create student record registration screen here
+							StudentRecordProcess();
 						}
 
 						else if (choice == 2)

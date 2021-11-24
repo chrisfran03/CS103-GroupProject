@@ -6,5 +6,6 @@
 
 using namespace std;
 
-void register_student(fstream& student_stream);
+//void register_student(fstream& student_stream);
+void StudentRecordProcess();
 

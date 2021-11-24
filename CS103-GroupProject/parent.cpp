@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <string>
 #include "parent.h"
+#include "student.h"
 using namespace std;
 
 const int SIZE = 100;
@@ -124,11 +125,18 @@ void login_parent(fstream& parent_stream)
 						if (choice == 1)
 						{
 							//Create student report screen here
+							StudentRecordProcess();
 						}
 
 						else if (choice == 2)
 						{
 							//Create school notice screen here
+							fstream noticeFile("notice.txt");
+							string notice;
+							while (getline(noticeFile, notice))
+							{
+								cout << notice << endl;
+							}
 						}
 
 						else if (choice == 3)
