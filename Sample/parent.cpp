@@ -10,8 +10,9 @@ using namespace std;
 
 
 const int SIZE = 100;
-char parent_user_name[SIZE];
+char parent_user_name[SIZE]; //declaring global variable 
 
+//structure for parent
 struct Parent
 {
 	char name[SIZE];
@@ -29,19 +30,19 @@ struct Parent
 
 
 
-void register_parent(fstream& parent_stream)
+void register_parent(fstream& parent_stream) //function to register parent
 {
 	system("CLS");
 	char parent_user_name[SIZE];
 	Parent p;
-	parent_stream.open("parent_registration.dat", ios::out | ios::app | ios::binary);
+	parent_stream.open("parent_registration.dat", ios::out | ios::app | ios::binary); //opening binary file parent_registration.dat
 
 	cout << "Enter your full name:";
 	cin.getline(p.name, SIZE);
 	cout << "Enter your gender:";
-	cin.getline(p.name, SIZE);
+	cin.getline(p.gender, SIZE);
 	cout << "Enter your DOB:";
-	cin.getline(p.name, SIZE);
+	cin.getline(p.dob, SIZE);
 	cout << "Enter your email:";
 	cin.getline(p.email, SIZE);
 	cout << "Enter your contact number:";
@@ -55,32 +56,29 @@ void register_parent(fstream& parent_stream)
 	cout << "Enter the emergency contact number:";
 	cin.getline(p.emergency_contact_num, SIZE);
 
-	parent_stream.close();
+	parent_stream.close(); //closing the file to prevent memory leakage
 
-	//
+	// check fo duplicate username
 	cout << "Enter your username:";
-	cin >> parent_user_name;
-	while (checkUsernameParent(parent_stream, parent_user_name) == true)
+	cin.getline(parent_user_name, SIZE);//temporary username
+	while (checkUsernameParent(parent_stream, parent_user_name) == true)   //checking whether username is valid
 	{
 		cout << "\nUsername already exist.Try again.\n\nEnter your username:";
-		cin >> parent_user_name;
+		cin.getline(parent_user_name, SIZE);  //if not enter username again
 	}
 
-	parent_stream.open("parent_registration.dat", ios::out | ios::app | ios::binary);
+	parent_stream.open("parent_registration.dat", ios::out | ios::app | ios::binary); //opening parent file
 
-	strcpy_s(p.username, parent_user_name);
+	strcpy_s(p.username, parent_user_name);  //copying temporary username to file
 	//
 
-
 	cout << "Enter your password:";
-	cin >> p.password;
+	cin.getline(p.password, SIZE);
 
-
-	cin.ignore();
 	system("CLS");
 
 	cout << "\nRegistering you to the system....." << endl;
-	parent_stream.write(reinterpret_cast<char*>(&p), sizeof(p));
+	parent_stream.write(reinterpret_cast<char*>(&p), sizeof(p)); //writing to file
 	cout << "Successfully registered you to the system....." << endl;
 
 	parent_stream.close();
@@ -88,7 +86,7 @@ void register_parent(fstream& parent_stream)
 	system("CLS");
 }
 
-void login_parent(fstream& parent_stream, fstream& student_stream)
+void login_parent(fstream& parent_stream, fstream& student_stream)  //function to login for parent
 {
 	Parent p;
 	char username[SIZE];
@@ -99,7 +97,7 @@ void login_parent(fstream& parent_stream, fstream& student_stream)
 	system("CLS");
 
 
-	parent_stream.open("parent_registration.dat", ios::in | ios::binary);
+	parent_stream.open("parent_registration.dat", ios::in | ios::binary); //opening the file to check the username and password against parent_registration file
 
 	if (!parent_stream)
 	{
@@ -120,7 +118,7 @@ void login_parent(fstream& parent_stream, fstream& student_stream)
 			parent_stream.read(reinterpret_cast<char*>(&p), sizeof(p));
 			while (!parent_stream.eof())
 			{
-				if (strcmp(username, p.username) == 0 && strcmp(password, p.password) == 0)
+				if (strcmp(username, p.username) == 0 && strcmp(password, p.password) == 0)  //checking if both username & password matches
 				{
 					system("CLS");
 
@@ -137,13 +135,13 @@ void login_parent(fstream& parent_stream, fstream& student_stream)
 
 						if (choice == 1)
 						{
-							child_report(parent_stream, student_stream,  p.name);
+							child_report(parent_stream, student_stream,  p.name);  //view child report
 						}
 
 						else if (choice == 2)
 						{
 							system("CLS");
-							cout << "No upcoming events!"<< endl;
+							cout << "No upcoming events!"<< endl;  //view school notices
 							system("pause");
 							system("CLS");
 
@@ -152,7 +150,7 @@ void login_parent(fstream& parent_stream, fstream& student_stream)
 
 						else if (choice == 3)
 						{
-							break;
+							break;  //exit
 						}
 
 						else
@@ -181,12 +179,12 @@ void login_parent(fstream& parent_stream, fstream& student_stream)
 		} while ((flag == false) && (i <= 3));
 
 	}
-	parent_stream.close();
+	parent_stream.close(); //closing file
 	system("pause");
 	system("CLS");
 }
 
-bool checkUsernameParent(fstream& parent_stream, char* user_name)
+bool checkUsernameParent(fstream& parent_stream, char* user_name)  //function to check for duplicate username for parent
 {
 	Parent p;
 	bool user_exists = false;
@@ -203,7 +201,7 @@ bool checkUsernameParent(fstream& parent_stream, char* user_name)
 		parent_stream.read(reinterpret_cast<char*>(&p), sizeof(p));
 		while (!parent_stream.eof())
 		{
-			if (strcmp(user_name, p.username) == 0)
+			if (strcmp(user_name, p.username) == 0)  // if username exists,  user_exists==true
 			{
 				user_exists = true;
 			}

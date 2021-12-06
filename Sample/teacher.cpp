@@ -24,13 +24,13 @@ struct Teacher
 
 
 
-void register_teacher(fstream& teacher_stream)
+void register_teacher(fstream& teacher_stream)  //function to register teacher
 {
 	system("CLS");
 	char user_name[SIZE];
 	Teacher t;
-	teacher_stream.open("teacher_registration.dat", ios::out | ios::app | ios::binary);
-
+	teacher_stream.open("teacher_registration.dat", ios::out | ios::app | ios::binary);  //opening teacher_registration file
+	//enter values
 	cout << "Enter your full name:";
 	cin.getline(t.name, SIZE);
 	cout << "Enter your gender:";
@@ -48,38 +48,36 @@ void register_teacher(fstream& teacher_stream)
 
 	teacher_stream.close();
 
-	//
+	//check for duplicate username
 	cout << "Enter your username:";
-	cin >> user_name;
+	cin.getline(user_name, SIZE);
 	while (checkUsernameTeacher(teacher_stream, user_name) == true)
 	{
 		cout << "\nUsername already exist.Try again.\n\nEnter your username:";
-		cin >> user_name;
+		cin.getline(user_name, SIZE);
 	}
 
 	teacher_stream.open("teacher_registration.dat", ios::out | ios::app | ios::binary);
 
-	strcpy_s(t.username, user_name);
+	strcpy_s(t.username, user_name); //copying the temporay username which was checked to the structure variable 
 	//
 
 
 	cout << "Enter your password:";
-	cin >> t.password;
+	cin.getline(t.password, SIZE);
 
-
-	cin.ignore();
 	system("CLS");
 
 	cout << "\nRegistering you to the system....." << endl;
-	teacher_stream.write(reinterpret_cast<char*>(&t), sizeof(t));
+	teacher_stream.write(reinterpret_cast<char*>(&t), sizeof(t));  // writing to file
 	cout << "Successfully registered you to the system....." << endl;
 
-	teacher_stream.close();
+	teacher_stream.close();//close file to prevent memory leakage
 	system("pause");
 	system("CLS");
 }
 
-void login_teacher(fstream& teacher_stream , fstream& student_stream)
+void login_teacher(fstream& teacher_stream , fstream& student_stream)  //function to login teacher
 {
 	Teacher t;
 	char username[SIZE];
@@ -92,7 +90,7 @@ void login_teacher(fstream& teacher_stream , fstream& student_stream)
 	system("CLS");
 
 
-	teacher_stream.open("teacher_registration.dat", ios::in | ios::binary);
+	teacher_stream.open("teacher_registration.dat", ios::in | ios::binary); //open teacher_registration file
 
 	if (!teacher_stream)
 	{
@@ -113,7 +111,7 @@ void login_teacher(fstream& teacher_stream , fstream& student_stream)
 			teacher_stream.read(reinterpret_cast<char*>(&t), sizeof(t));
 			while (!teacher_stream.eof())
 			{
-				if (strcmp(username, t.username) == 0 && strcmp(password, t.password) == 0)
+				if (strcmp(username, t.username) == 0 && strcmp(password, t.password) == 0)  //checking if username or password is same
 				{
 					system("CLS");
 
@@ -121,7 +119,7 @@ void login_teacher(fstream& teacher_stream , fstream& student_stream)
 
 					while (exit!=true)
 					{
-						cout << "1.Create student record" << endl;
+						cout << "1.Manage student records" << endl;
 						cout << "2.Logout" << endl;
 						cout << "Enter your choice:";
 						cin >> choice;
@@ -129,7 +127,7 @@ void login_teacher(fstream& teacher_stream , fstream& student_stream)
 
 						if (choice == 1)
 						{
-							display_student_record_screen(student_stream);
+							display_student_record_screen(student_stream);  //function to display student record screen
 						}
 
 						else if (choice == 2)
@@ -161,20 +159,20 @@ void login_teacher(fstream& teacher_stream , fstream& student_stream)
 
 			}
 
-		} while ((flag == false) && (i <= 3));
+		} while ((flag == false) && (i <= 3)); //maximum 3 login attempts
 
 	}
-	teacher_stream.close();
+	teacher_stream.close(); //close file
 	system("pause");
 	system("CLS");
 }
 
-bool checkUsernameTeacher(fstream& teacher_stream, char* user_name)
+bool checkUsernameTeacher(fstream& teacher_stream, char* user_name)  //function to check for duplicate username for teachers 
 {
 	Teacher t;
 	bool user_exists = false;
 
-	teacher_stream.open("teacher_registration.dat", ios::in | ios::binary);
+	teacher_stream.open("teacher_registration.dat", ios::in | ios::binary);  //opening teacgher_registration file
 
 	if (!teacher_stream)
 	{
@@ -186,7 +184,7 @@ bool checkUsernameTeacher(fstream& teacher_stream, char* user_name)
 		teacher_stream.read(reinterpret_cast<char*>(&t), sizeof(t));
 		while (!teacher_stream.eof())
 		{
-			if (strcmp(user_name, t.username) == 0)
+			if (strcmp(user_name, t.username) == 0) //if input username is username then user_exists == true
 			{
 				user_exists = true;
 			}
@@ -194,7 +192,7 @@ bool checkUsernameTeacher(fstream& teacher_stream, char* user_name)
 			teacher_stream.read(reinterpret_cast<char*>(&t), sizeof(t));
 		}
 	}
-	teacher_stream.close();
+	teacher_stream.close(); //closing the file to prevent memory leakage
 
 	return user_exists;
 }

@@ -27,8 +27,8 @@ int main()
 	{
 		cout << "School name: " << endl;
 		cout << "Contact details: " << endl;
-		cout << "Latest events or upcoming events details: " << endl;
-		cout << "Term dates: " << endl;
+		cout << "Latest events or upcoming events details:No upcoming events!! " << endl;
+		cout << "Term dates:01/01/22-01/06/22 " << endl;
 		cout << "1.Teacher" << endl;
 		cout << "2.Parent" << endl;
 		cout << "3.Admin" << endl;
@@ -39,17 +39,17 @@ int main()
 		switch (choice)
 		{
 		case 1:
-			display_teacher_screen();
+			display_teacher_screen();  //calling the function to display teacher screen
 			break;
 		case 2:
 			//login parent
-			display_parent_screen();
+			display_parent_screen(); //calling the function to display parent screen
 			break;
 		case 3:
-			display_admin_screen();
+			display_admin_screen(); //calling the function to display admin screen
 			break;
 		case 4:
-			exit(0);
+			exit(0); //exit 
 		default:
 			cout << "Enter a valid option!!!" << endl;
 			break;
@@ -60,7 +60,7 @@ int main()
 }
 
 
-void display_teacher_screen()
+void display_teacher_screen() //function to display teacer screen 
 {
 	int choice;
 	fstream teacher_stream;
@@ -78,16 +78,16 @@ void display_teacher_screen()
 
 		if (choice == 1)
 		{
-			register_teacher(teacher_stream);
+			register_teacher(teacher_stream);  // calling the function to register teacher
 		}
 		else if (choice == 2)
 		{
-			login_teacher(teacher_stream, student_stream );
+			login_teacher(teacher_stream, student_stream );  //calling the function to login teacher
 		}
 
 		else if (choice == 3)
 		{
-			break;
+			break;  //go back
 		}
 		else
 		{
@@ -100,7 +100,7 @@ void display_teacher_screen()
 
 
 
-void display_parent_screen()
+void display_parent_screen()  //function to display the parent screen 
 {
 	int choice;
 	fstream parent_stream;
@@ -109,6 +109,7 @@ void display_parent_screen()
 
 	while (1)
 	{
+		//output screen
 		cout << "1.Register" << endl;
 		cout << "2.Login" << endl;
 		cout << "3.Go Back" << endl;
@@ -118,21 +119,16 @@ void display_parent_screen()
 
 		if (choice == 1)
 		{
-			register_parent(parent_stream);
+			register_parent(parent_stream); //function to register the parent
 		}
 		else if (choice == 2)
 		{
-			login_parent(parent_stream,student_stream);
+			login_parent(parent_stream,student_stream); //function to login the parent
 		}
 
 		else if (choice == 3)
 		{
-			break;
-		}
-		else if (choice == 4)
-		{
-			cout << "q";
-			
+			break; //go back
 		}
 		else
 		{
