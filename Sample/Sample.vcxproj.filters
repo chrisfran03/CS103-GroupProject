@@ -45,4 +45,10 @@
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="parent_registration.dat" />
+    <None Include="Room_1.dat" />
+    <None Include="Room_2.dat" />
+    <None Include="teacher_registration.dat" />
+  </ItemGroup>
 </Project>

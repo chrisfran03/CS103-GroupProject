@@ -151,6 +151,12 @@
     <ClInclude Include="student.h" />
     <ClInclude Include="teacher.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="parent_registration.dat" />
+    <None Include="Room_1.dat" />
+    <None Include="Room_2.dat" />
+    <None Include="teacher_registration.dat" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

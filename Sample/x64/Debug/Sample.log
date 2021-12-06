@@ -1,4 +1,9 @@
-﻿  student.cpp
-C:\Users\asus\source\repos\Sample\Sample\student.cpp(995,7): warning C4101: 'name': unreferenced local variable
-C:\Users\asus\source\repos\Sample\Sample\student.cpp(994,9): warning C4101: 'p': unreferenced local variable
-  Sample.vcxproj -> C:\Users\asus\source\repos\Sample\x64\Debug\Sample.exe
+﻿  admin.cpp
+  parent.cpp
+  Sample.cpp
+  student.cpp
+C:\Users\97266\OneDrive - UP Education\Desktop\CS 103 C++ Integrated Studio advanced\Sample-Final\Sample\student.cpp(995,7): warning C4101: 'name': unreferenced local variable
+C:\Users\97266\OneDrive - UP Education\Desktop\CS 103 C++ Integrated Studio advanced\Sample-Final\Sample\student.cpp(994,9): warning C4101: 'p': unreferenced local variable
+  teacher.cpp
+  Generating Code...
+  Sample.vcxproj -> C:\Users\97266\OneDrive - UP Education\Desktop\CS 103 C++ Integrated Studio advanced\Sample-Final\x64\Debug\Sample.exe
